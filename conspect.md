@@ -252,4 +252,16 @@
 5) <b>Произношение отдельных грамматических форм.</b><br>
 	Окончание Им. падежа мн. числа среднего рода (а) - [ъ]<br>
 	(окна, болота)
-		
+
+## Литература: 
+1) <b>Виды фонетических алгоритмов</b> - Фонетические алгоритмы (https://habrahabr.ru/post/114947/)
+2) <b>Soundex</b> - https://en.wikipedia.org/wiki/Soundex
+	     https://rosettacode.org/wiki/Soundex
+3) <b>NYSIIS</b> - https://en.wikipedia.org/wiki/New_York_State_Identification_and_Intelligence_System
+	    https://rosettacode.org/wiki/NYSIIS
+4) <b>Daitch-Mokotoff Soundex</b> - https://en.wikipedia.org/wiki/Daitch%E2%80%93Mokotoff_Soundex
+			     http://www.avotaynu.com/soundex.htm
+5) <b>Metaphone, Double Metaphone</b> - https://en.wikipedia.org/wiki/Metaphone
+6) <b>Русский Metaphone</b> - https://web.archive.org/web/20071107145942/http://kankowski.narod.ru/dev/metaphoneru.htm
+7) <b>Caverphone</b> - https://en.wikipedia.org/wiki/Caverphone	       
+8) <b>ОРФОЭПИЯ</b> - С.В. Князев, С.К. Пожарицкая. Современный русский литературный язык: Фонетика, графика, орфография, орфоэпия. Академический Проект : 2012 год
