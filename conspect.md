@@ -237,7 +237,7 @@ Many exceptional cases of similar spellings are exist and for those other rules 
 From table – 1 it is observed that the words with serial number 1, 2, 3, 5, 6, 7, 8, 11, 12, 16, 18, 19, 21, 23, 24, 25 are identified correctly by all the three algorithms. But highlighted words in table – 1 are not identified correctly by these algorithms. Non-identified words by different algorithms in table – 1 are summarized in table – 2.<br>
 Using soundex algorithm, both "piece" and "peace" (sr. no 2 in table – 1) return the same string "P200” that proves the success of the algorithm, while "would" (sr. no 4 in table – 1) yields "W430" and “wood” results in “W300” that proves the failure of algorithm.
 
-<b>БУДУЩИЕ УСОВЕРШЕНСТВОВАНИЯ<b><br>
+<b>БУДУЩИЕ УСОВЕРШЕНСТВОВАНИЯ<b></br>
 1) Можно объединить более двух алгоритмов для получения гибридного алгоритма для улучшения результата.<br> 
 2) Также возможно использование искусственного интеллекта, который может быть включен в такие алгоритмы для получения более мощных систем.
 
