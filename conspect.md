@@ -215,16 +215,16 @@ Many exceptional cases of similar spellings are exist and for those other rules 
 	3) Приведение слова к верхнему регистру<br>
 	4) Удаление повторяющихся символов<br>
 	5) Этот процесс определяет фонетическое сходство между двумя или более словами. Он состоит из набора правил произношения английского языка, после их применения мы получаем закодированный английский текст, который представляет собой фонетический код для данного слова. (Для кодирования целого текста применяется отдельный набор правил).<br>
-		5.1 Replace each occurrence of CE, CI , CY -> S<br>
-		5.2 Replace each occurrence of GE, GI, GY -> J<br>
-		5.3 Replace each occurrence of WR -> R<br>
-		5.4 Replace each occurrence of GN, KN, PN -> N<br>
-		5.5 Replace each occurrence of CK -> K<br>
-		5.6 Replace each occurrence of DGE -> J<br>
-		5.7 Replace each occurrence of OUL -> U<br>
-		5.8 Replace each occurrence of OUGH -> F<br>
-		5.9 Replace each occurrence of SH -> S<br>
-		5.10 Replace each occurrence of GHT -> T<br>
+		a. Replace each occurrence of CE, CI , CY -> S<br>
+		b. Replace each occurrence of GE, GI, GY -> J<br>
+		c. Replace each occurrence of WR -> R<br>
+		d. Replace each occurrence of GN, KN, PN -> N<br>
+		e. Replace each occurrence of CK -> K<br>
+		f. Replace each occurrence of DGE -> J<br>
+		g. Replace each occurrence of OUL -> U<br>
+		h. Replace each occurrence of OUGH -> F<br>
+		i. Replace each occurrence of SH -> S<br>
+		j. Replace each occurrence of GHT -> T<br>
 	6) Удалить все гласные из результирующего кода, только если это не начало слова. 
 	7) Отображение закодированного слова
 	8) Окончание работы программы
@@ -237,11 +237,56 @@ Many exceptional cases of similar spellings are exist and for those other rules 
 From table – 1 it is observed that the words with serial number 1, 2, 3, 5, 6, 7, 8, 11, 12, 16, 18, 19, 21, 23, 24, 25 are identified correctly by all the three algorithms. But highlighted words in table – 1 are not identified correctly by these algorithms. Non-identified words by different algorithms in table – 1 are summarized in table – 2.<br>
 Using soundex algorithm, both "piece" and "peace" (sr. no 2 in table – 1) return the same string "P200” that proves the success of the algorithm, while "would" (sr. no 4 in table – 1) yields "W430" and “wood” results in “W300” that proves the failure of algorithm.
 
-<b>БУДУЩИЕ УСОВЕРШЕНСТВОВАНИЯ<b></br>
+<b>На будущее</b>
 1) Можно объединить более двух алгоритмов для получения гибридного алгоритма для улучшения результата.<br> 
 2) Также возможно использование искусственного интеллекта, который может быть включен в такие алгоритмы для получения более мощных систем.
 
+## A New Algorithm for the Alignment of Phonetic Sequences 
+Дата: 2000
+Изобрел: Grzegorz Kondrak
 
+Новый алгоритм, который сочетает в себе ряд методов, разработанных для сравнения последовательности с scoring scheme для вычисления фонетического сходства на основе функций многозначной. Алгоритм работает лучше на когнитивном выравнивании, с точки зрения точности и эффективности, чем другие алгоритмы, представленные в литературе.
+
+Идентификация соответствующих сегментов в sequences of phones  является необходимым этапом в диахронической и синхронической фонологии. Как правило, мы заинтересованы в выравнивании последовательностей, которые представляют формы, которые связаны каким-либо образом: пара однокоренных слов, или глубинных и поверхностных форм слова или предполагаемого и фактического произношения слова.
+
+<b>Алгоритмы выравнивания, как правило, содержат два основных компонента:</b> 
+1) метрики для измерения расстояния между phones
+Часто рассчитывается на основе фонологических особенностей, которые кодируют определенные свойства phones.
+	
+2) процедуры нахождения оптимального выравнивания (alignment)
+Очевидным кандидатом для последнего является известный алгоритм динамического программирования (ДП) для струнного выравнивание (Вагнера и Фишера, 1974)
+
+<b>Different approaches to phonetic alignment:</b>
+1) Covington (1996)
+Он использовал поиск в глубину (depth-first) и специальную функцию расстояния, чтобы выровнять слова для исторического сравнения. В последующей работе (Covington, 1998) он расширил алгоритм выравнивания слов для более чем двух языков.
+	
+2) Somers (1998)
+Специальный алгоритм alignment данных детской артикуляции с моделью взрослых.
+
+3) Gildea and Jurafsky (1996)
+Применили алгоритм ДП к pre-align input and output phonetic strings для того, чтобы повысить производительность их системы индукционного датчика.
+
+4) Nerbonne and Heeringa (1997)
+Использовали аналогичную процедуру для вычисления относительного расстояния между словами из разных голландских диалектов.
+
+Автор представляет новый алгоритм выравнивания когнатов (alignment of cognates). Он сочетает в себе различные методики, разработанные для сравнения последовательностей, с соответствующей схемой подсчета для вычисления фонетического сходства на основе многозначных признаков.
+
+<b>Comparing Phones</b><br>
+Для выравнивания фонетических последовательностей необходимо сначала определить расстояние между отдельными phones. Численное значение, присвоенное функцией паре сегментов, называется ценой или штрафом замещения.<br> 
+Функция часто имеет тенденцию покрывать пары, состоящие из сегмента и нулевого символа, которые соответствуют операциям вставки и удаления.<br>
+Функция расстояния, удовлетворяющая следующим аксиомам, называется метрикой:<br>
+1. Ɐa, b : d(a, b) >_0 (nonnegative property)
+2. Ɐa, b:d(a,b) =0 ⇔ a=b (zero property)
+3. Ɐa, b : d(a,b) = d(b,a) (symmetry)
+4. Ɐa, b, c :d(a, b) + d(b, c) > d(a, c) (triangle inequality)
+
+<b>Covington's Distance Function vs. Feature-Based Metrics</b>
+Ковингтон (1996), для его когнитивного алгоритма выравнивания, построил специальную функцию расстояния. Он был разработан методом проб и ошибок на тестовом наборе из 82 схожих пар различных родственных языков.<br>
+<b>ДП:</b> не использует фонологических признаков и различает только три типа: <b>согласные, гласные и glides</b> (Глайд (англ. glide — «скольжение») — в фонетике: краткий, неполный, неопределённый по качеству звук, возникающий как переходный элемент в сочетании звуков, различных по месту образования.). Многие важные характеристики звуков, такие как место и способ артикуляции, игнорируются.
+For example, both yacht and will are treated identically as a glide- vowel-consonant sequence.
+The function's values for substitutions are listed in the "penalty" column in Table 2. The penalty for an indel is 40 if it is preceded by another indel, and 50 otherwise. Covington (1998) acknowledges that his distance function is "just a stand-in for a more sophisticated, perhaps feature-based, system
+
+to be continued...
 
 ## ОРФОЭПИЯ по Князев С.В., Пожарицкая С.К. Современный русский литературный язык: фонетика, графика, орфография, орфоэпия
 
@@ -329,3 +374,4 @@ Using soundex algorithm, both "piece" and "peace" (sr. no 2 in table – 1) retu
 7) <b>Caverphone</b> - https://en.wikipedia.org/wiki/Caverphone	       
 8) <b>ОРФОЭПИЯ</b> - С.В. Князев, С.К. Пожарицкая. Современный русский литературный язык: Фонетика, графика, орфография, орфоэпия. Академический Проект : 2012 год
 9) Study Existing Various Phonetic Algorithms and Designing and Development of a working model for the New Developed Algorithm and Comparison by implementing it with Existing Algorithm(s) - https://pdfs.semanticscholar.org/8a18/6407ca104b5adebac065b78f855dfac1aa95.pdf
+10)A New Algorithm for the Alignment of Phonetic Sequences - http://www.anthology.aclweb.org/A/A00/A00-2038.pdf
