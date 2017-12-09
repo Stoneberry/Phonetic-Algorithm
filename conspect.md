@@ -179,6 +179,69 @@
 	
 	https://en.wikipedia.org/wiki/Caverphone
 	
+## Study Existing Various Phonetic Algorithms and Designing and Development of a working model for the New Developed Algorithm and Comparison by implementing it with Existing Algorithm(s)
+Дата: 2014
+Изобрели: Vimal P.Parmar (Research Scholar), CK Kumbharana (Ph.D Head, Guide)
+
+A phonetic algorithm is an algorithm to identify words with similar pronounce and is used to index the words based on their pronunciation. In the presented research paper, the researcher has studied the different algorithm related to phonetics and developed a new algorithm and compared it with the existing algorithms.
+
+Основная цель исследователя заключается в изучении и выявлении некоторых случаев, при которых алгоритм не работает, поэтому, подобрав 25 схожих слов, исследователь р разработал рабочую модель и алгоритм для выявления схожих фонетических слов.
+
+<b>Были рассмотрены: </b>
+	1) Soundex
+	2) Daitch-mokotoff soundex
+	3) Kolner phonetic (This algorithm is similar to soundex but designed for German words)
+	4) Metaphone, Metaphone 3, Double metaphone
+	5) NYSIIS
+	6) Match Rating Approach (developed by Western Airlines in 1977 for indexing and comparing homophonous names)
+	7) Caverphone
+
+<b>Применение фонетических алгоритмов:</b>
+1) Применение этих алгоритмов может быть включено в систему распознавания речи для идентификации правильного слова из аналогичных фонетических слов.
+2) In spelling correction to produce more than one correct words having similar pronounce
+3) Поисковые приложения могут предоставить набор связанных поисковых терминов, когда в слове допущена орфографическая ошибка, находя слова с позожим кодом. 
+4) Полезно для детей, чтобы увеличить словарный запас английских слов и узнать слова, имеющие похожее произношение с различным смыслом.
+5) Может использоваться для поиска и изменения имен из больших баз данных с похожими произношениями.
+6) Эти фонетические алгоритмы также включены в SQL, MySQL, Oracle и Informatica, а также PHP скрипты. В базе данных можно искать данные с аналогиченым произношением. 
+7) To build intelligent dictionary.
+
+<b>Предложенный алгоритм:</b>
+
+Алгоритм просто, он требует модификации, чтобы охватить многие правила произношения английского языка. Этот алгоритм сделан на основе саундэкса, метафона и правил английского произношения.<br>
+Many exceptional cases of similar spellings are exist and for those other rules should be incorporated to enhance the algorithm.<br>
+Большинство фонетических алгоритмов предназначены для поиска имен и фамилий, хранящихся в базе данных, но представленный алгоритм предназначен для поиска актуального английского слова, которое имеет похожее произношение, но различное значение.
+	1) Начало<br>
+	2) Ввод английского текста или слова<br>
+	3) Приведение слова к верхнему регистру<br>
+	4) Удаление повторяющихся символов<br>
+	5) Этот процесс определяет фонетическое сходство между двумя или более словами. Он состоит из набора правил произношения английского языка, после их применения мы получаем закодированный английский текст, который представляет собой фонетический код для данного слова. (Для кодирования целого текста применяется отдельный набор правил).<br>
+		5.1 Replace each occurrence of CE, CI , CY -> S<br>
+		5.2 Replace each occurrence of GE, GI, GY -> J<br>
+		5.3 Replace each occurrence of WR -> R<br>
+		5.4 Replace each occurrence of GN, KN, PN -> N<br>
+		5.5 Replace each occurrence of CK -> K<br>
+		5.6 Replace each occurrence of DGE -> J<br>
+		5.7 Replace each occurrence of OUL -> U<br>
+		5.8 Replace each occurrence of OUGH -> F<br>
+		5.9 Replace each occurrence of SH -> S<br>
+		5.10 Replace each occurrence of GHT -> T<br>
+	6) Удалить все гласные из результирующего кода, только если это не начало слова. 
+	7) Отображение закодированного слова
+	8) Окончание работы программы
+
+<b>Сравнение работы алгоритмов:</b> 
+Программы сравнивались по: время работы, затрачиваемому месту, вопросы производительности, точности и реализации. 
+Точность является критическим фактором для правильности алгоритма, поскольку английский язык со сложной структурой правописания, имеющей разное значение с похожим произношением. (Таблицы сравнения можно посмотреть в самой работе по ссылке).
+Успех алгоритма зависит от того, правильно ли введенные имена идентифицированы или нет.<br>
+
+From table – 1 it is observed that the words with serial number 1, 2, 3, 5, 6, 7, 8, 11, 12, 16, 18, 19, 21, 23, 24, 25 are identified correctly by all the three algorithms. But highlighted words in table – 1 are not identified correctly by these algorithms. Non-identified words by different algorithms in table – 1 are summarized in table – 2.<br>
+Using soundex algorithm, both "piece" and "peace" (sr. no 2 in table – 1) return the same string "P200” that proves the success of the algorithm, while "would" (sr. no 4 in table – 1) yields "W430" and “wood” results in “W300” that proves the failure of algorithm.
+
+<b>БУДУЩИЕ УСОВЕРШЕНСТВОВАНИЯ<b><br>
+1) Можно объединить более двух алгоритмов для получения гибридного алгоритма для улучшения результата.<br> 
+2) Также возможно использование искусственного интеллекта, который может быть включен в такие алгоритмы для получения более мощных систем.
+
+
 
 ## ОРФОЭПИЯ по Князев С.В., Пожарицкая С.К. Современный русский литературный язык: фонетика, графика, орфография, орфоэпия
 
@@ -265,3 +328,4 @@
 6) <b>Русский Metaphone</b> - https://web.archive.org/web/20071107145942/http://kankowski.narod.ru/dev/metaphoneru.htm
 7) <b>Caverphone</b> - https://en.wikipedia.org/wiki/Caverphone	       
 8) <b>ОРФОЭПИЯ</b> - С.В. Князев, С.К. Пожарицкая. Современный русский литературный язык: Фонетика, графика, орфография, орфоэпия. Академический Проект : 2012 год
+9) Study Existing Various Phonetic Algorithms and Designing and Development of a working model for the New Developed Algorithm and Comparison by implementing it with Existing Algorithm(s) - https://pdfs.semanticscholar.org/8a18/6407ca104b5adebac065b78f855dfac1aa95.pdf
