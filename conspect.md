@@ -263,6 +263,7 @@ Using soundex algorithm, both "piece" and "peace" (sr. no 2 in table – 1) retu
 2) Somers (1998)
 Специальный алгоритм alignment данных детской артикуляции с моделью взрослых.
 
+
 3) Gildea and Jurafsky (1996)
 Применили алгоритм ДП к pre-align input and output phonetic strings для того, чтобы повысить производительность их системы индукционного датчика.
 
@@ -282,9 +283,9 @@ Using soundex algorithm, both "piece" and "peace" (sr. no 2 in table – 1) retu
 
 <b>Covington's Distance Function vs. Feature-Based Metrics</b>
 Ковингтон (1996), для его когнитивного алгоритма выравнивания, построил специальную функцию расстояния. Она была разработана методом проб и ошибок на тестовом наборе из 82 схожих пар различных родственных языков.<br>
-<b>ДП:</b> не использует фонологических признаков и различает только три типа: <b>согласные, гласные и glides</b> (Глайд (англ. glide — «скольжение») — в фонетике: краткий, неполный, неопределённый по качеству звук, возникающий как переходный элемент в сочетании звуков, различных по месту образования.). Многие важные характеристики звуков, такие как место и способ артикуляции, игнорируются.
+<b>ДП:</b> не использует фонологических признаков и различает только три типа: <b>согласные, гласные и glides</b> (Глайд (англ. glide — «скольжение») — в фонетике: краткий, неполный, неопределённый по качеству звук, возникающий как переходный элемент в сочетании звуков, различных по месту образования.). Многие важные характеристики звуков, такие как место и способ артикуляции, игнорируются.<br>
 For example, both yacht and will are treated identically as a glide- vowel-consonant sequence.
-The function's values for substitutions are listed in the "penalty" column in Table 2. The penalty for an indel is 40 if it is preceded by another indel, and 50 otherwise. Covington (1998) acknowledges that his distance function is "just a stand-in for a more sophisticated, perhaps feature-based, system. 
+The function's values for substitutions are listed in the "penalty" column in Table 2. The penalty for an indel is 40 if it is preceded by another indel, and 50 otherwise. Covington (1998) acknowledges that his distance function is "just a stand-in for a more sophisticated, perhaps feature-based, system. <br>
 Gildea and Jurafsky (1996) и Nerbonne and Heeringa (1997) использоавли функцию расстояния, основанную на бинарных признаках. Такие функции дают возможность различить большое кол-во разных фонем. Основное предположение состоит в том, что количество двоичных признаков, на которые различаются два заданных звука, является хорошим показателем их близости. Фонетические сегменты представлены в виде бинарных векторов (in which every entry stands for a single articulatory feature.). 
 Штраф за замену определяется как Расстоя́ние Хэ́мминга между двумя векторами объектов.<br>
 Расстоя́ние Хэ́мминга — число позиций, в которых соответствующие символы двух слов одинаковой длины различны. (Википедия)<br>
@@ -303,7 +304,17 @@ Ladefoged (1995) разработал многозначную систему п
 Nerbonne и Heeringa (1997) экспериментировали с утяжелением каждой характеристики by information gain, но обнаружили, что это имеет отрицательный эффект на выравнивание. 
 
 <b>Similarity vs. Distance</b><br>
-Although all four algorithms listed in Table 1 measure relatedness between phones by means of a distance function, such an approach does not seem to be the best for dealing with phonetic units. The fact that Covington's distance function is not a metric is not an accidental oversight; rather, it reflects certain inherent characteristics of phones.
+Although all four algorithms listed in Table 1 measure relatedness between phones by means of a distance function, such an approach does not seem to be the best for dealing with phonetic units. The fact that Covington's distance function is not a metric is not an accidental oversight; rather, it reflects certain inherent characteristics of phones.<br>
+Так как гласные более непостоянны(volatile), чем согласные, то сопоставление индентичных согласных лучше, чем сопоставление одинаковых гласных. A phone that has two dif- ferent places of articulation, such as labio-velar [w], can be close to two phones that are distant from each other, such as labial [b] and velar [g].<br>
+
+Автор в своем алгоритме использует альтернативный подход к сравнению сегментов, который основан на понятии подобия.<br>
+Система степени подобия (similarity scoring scheme) присваивает large positive scores to pairs of related seg- ments; large negative scores to pairs of dissimilar segments; and small negative scores to indels(вставка). Оптимальное выравнивание является тот, который максимизирует общий балл.
+
+<b>Tree Search vs. Dynamic Programming</b><br>
+Алгоритм Сомерса не подходит:<br>
+Алгоритм  необычен тем, что выбранное выравнивание не обязательно сводит к минимуму сумму расстояний между отдельными сегментами. Вместо этого он рекурсивно выбирает наиболее похожие сегменты или" точки привязки " в сравниваемых последовательностях. (Such an approach has a serious flaw. Suppose that the sequences to be aligned are tewos and divut. Even though the corresponding segments are slightly different, the alignment is straightforward. However, an algorithm that looks for the best matching segments first, will erroneously align the two t's. Because of its recursive nature, the algorithm has no chance of recovering from such an error)
+
+
 
 to be continued...
 
