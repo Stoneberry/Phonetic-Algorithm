@@ -209,7 +209,7 @@ A phonetic algorithm is an algorithm to identify words with similar pronounce an
 
 Алгоритм просто, он требует модификации, чтобы охватить многие правила произношения английского языка. Этот алгоритм сделан на основе саундэкса, метафона и правил английского произношения.<br>
 Many exceptional cases of similar spellings are exist and for those other rules should be incorporated to enhance the algorithm.<br>
-Большинство фонетических алгоритмов предназначены для поиска имен и фамилий, хранящихся в базе данных, но представленный алгоритм предназначен для поиска актуального английского слова, которое имеет похожее произношение, но различное значение.
+Большинство фонетических алгоритмов предназначены для поиска имен и фамилий, хранящихся в базе данных, но представленный алгоритм предназначен для поиска актуального английского слова, которое имеет похожее произношение, но различное значение.<br>
 	1) Начало<br>
 	2) Ввод английского текста или слова<br>
 	3) Приведение слова к верхнему регистру<br>
@@ -246,6 +246,8 @@ Using soundex algorithm, both "piece" and "peace" (sr. no 2 in table – 1) retu
 Изобрел: Grzegorz Kondrak
 
 Новый алгоритм, который сочетает в себе ряд методов, разработанных для сравнения последовательности с scoring scheme для вычисления фонетического сходства на основе многозначных признаков ( multivalued features (?)). Алгоритм работает лучше на когнитивном выравнивании (alignment ?), с точки зрения точности и эффективности, чем другие алгоритмы, представленные в литературе.
+
+Выравнивание - способ размещения данных в памяти особым образом для ускорения доступа
 
 Идентификация соответствующих сегментов в sequences of phones  является необходимым этапом в диахронической и синхронической фонологии. Как правило, мы заинтересованы в выравнивании последовательностей, которые представляют формы, которые связаны каким-либо образом: пара однокоренных слов, или глубинных и поверхностных форм слова или предполагаемого и фактического произношения слова.
 
@@ -311,9 +313,34 @@ Although all four algorithms listed in Table 1 measure relatedness between phone
 Система степени подобия (similarity scoring scheme) присваивает large positive scores to pairs of related seg- ments; large negative scores to pairs of dissimilar segments; and small negative scores to indels(вставка). Оптимальное выравнивание является тот, который максимизирует общий балл.
 
 <b>Tree Search vs. Dynamic Programming</b><br>
-Алгоритм Сомерса не подходит:<br>
+1) Алгоритм DP подходит<br>
+2) Алгоритм Сомерса не подходит:<br>
 Алгоритм  необычен тем, что выбранное выравнивание не обязательно сводит к минимуму сумму расстояний между отдельными сегментами. Вместо этого он рекурсивно выбирает наиболее похожие сегменты или" точки привязки " в сравниваемых последовательностях. (Such an approach has a serious flaw. Suppose that the sequences to be aligned are tewos and divut. Even though the corresponding segments are slightly different, the alignment is straightforward. However, an algorithm that looks for the best matching segments first, will erroneously align the two t's. Because of its recursive nature, the algorithm has no chance of recovering from such an error)
+3) Covington: <br>
+Ковингтон, который использует простой глубину поиска, чтобы найти оптимального выравнивания, обеспечивает следующие аргументы для отказа от алгоритма ДП:<br>
+	- выравниваемые строки относительно коротки, поэтому эффективность динамического программирования на длинных строках не требуется.<br>
+	- динамическое программирование обычно дает только одно выравнивание для каждой пары строк, но для сравнительной реконструкции может потребоваться n лучших альтернатив, или все, соответствующие некоторому критерию.<br>
+	- the tree search algorithm lends it- self to modification for special handling of metathesis or assimilation<br>
+	
+Автор считает, что необходимо иметь polynomially bound algorithm in the core, так как: <br>
+	- The efficiency of the algorithm might not be relevant in the simple case of comparing two words, but if the algorithm is to be of practical use, it will have to operate on large bilingual wordlists.<br> 
+	- Сombining the alignment algorithm with some sort of strategy for identifying cognates on the basis of phonetic similarity is likely to require comparing thousands of words against one another. <br>
+<br>
+Могут опускаться не только некоторые сегменты, но и целые морфемы, поэтому штраф/пенальти за пропуск будет считаться как функция его длины, а не как простая сумма отдельных удалений.<br>
+	<b>gap(x) = r + sx</b><br>
+<b>r</b> - penalty for the introduction of a gap<br>
+<b>s</b> - penalty for each symbol in the gap<br>
 
+<b>The Algorithm: ALINE</b><br>
+1) Сходство, а не расстояние, используется для определения наилучших local alignments, которые that fall within E of the optimal alignment. (????)<br>
+2) Операции: <br>
+	- вставки/удаления <br>
+	- замена <br>
+	- расширения/сжатия<br>
+3) Для расчета сходства фонетических сегментов используются многозначные признаки<br>
+4) Сделан на С++<br>
+5) Affine gaps were found to make little difference when local comparison is used and they were subsequently removed from ALINE<br>
+Дальше идет описание алгоритма, и я что-то вообще ничего не понимаю
 
 
 to be continued...
